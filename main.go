@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/nathankjer/tickertwins-backend/controllers"
