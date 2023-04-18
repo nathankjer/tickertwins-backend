@@ -1,0 +1,1 @@
+export DB_CONN="host=localhost port=5432 user=home password=L0g1cCl1ent dbname=tickertwins sslmode=disable"
