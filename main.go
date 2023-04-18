@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/gin-contrib/cors"
@@ -25,5 +26,5 @@ func main() {
 	if port == "" {
 		port = "8000"
 	}
-	router.Run(port)
+	router.Run(fmt.Sprintf(":%s", port))
 }
