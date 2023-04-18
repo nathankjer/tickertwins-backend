@@ -21,7 +21,7 @@ func GetTickers(c *gin.Context) {
 		Or("UPPER(name) ILIKE ? AND enabled = ?", "%"+query+"%", true).
 		Limit(7).
 		Find(&tickers)
-
+        c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(200, tickers)
 }
 
@@ -51,5 +51,6 @@ func GetSimilarTickers(c *gin.Context) {
 		Ticker:         ticker,
 		SimilarTickers: relatedTickers,
 	}
+        c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(200, response)
 }
