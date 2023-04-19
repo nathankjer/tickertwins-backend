@@ -18,6 +18,7 @@ import (
 func setupRouter() *gin.Engine {
 	router := gin.Default()
 	router.GET("/tickers", controllers.GetTickers)
+	router.GET("/tickers/random", controllers.GetRandomTickers)
 	router.GET("/tickers/:symbol/similar", controllers.GetSimilarTickers)
 	return router
 }
