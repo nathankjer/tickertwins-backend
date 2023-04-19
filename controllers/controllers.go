@@ -9,24 +9,10 @@ import (
 	"github.com/nathankjer/tickertwins-backend/models"
 )
 
-func CORS() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "*")
-		c.Next()
-	}
-}
-
-func validateParam(c *gin.Context, param, paramName, errorMsg string) bool {
-	if param == "" {
-		c.AbortWithStatusJSON(400, gin.H{"error": errorMsg})
-		return false
-	}
-	return true
-}
-
 func GetTickers(c *gin.Context) {
 	query := strings.TrimSpace(strings.ToUpper(c.Query("q")))
-	if !validateParam(c, query, "q", "Missing required parameter 'q'.") {
+	if query == "" {
+		c.AbortWithStatusJSON(400, gin.H{"error": "Missing required parameter 'q'."})
 		return
 	}
 
@@ -39,12 +25,14 @@ func GetTickers(c *gin.Context) {
 		c.AbortWithStatusJSON(500, gin.H{"error": "Error retrieving tickers."})
 		return
 	}
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(200, tickers)
 }
 
 func GetSimilarTickers(c *gin.Context) {
 	symbol := strings.TrimSpace(strings.ToUpper(c.Param("symbol")))
-	if !validateParam(c, symbol, "symbol", "Missing required path parameter 'symbol'.") {
+	if symbol == "" {
+		c.AbortWithStatusJSON(400, gin.H{"error": "Missing required parameter 'symbol'."})
 		return
 	}
 
@@ -72,5 +60,6 @@ func GetSimilarTickers(c *gin.Context) {
 		Ticker:         ticker,
 		SimilarTickers: relatedTickers,
 	}
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(200, response)
 }
