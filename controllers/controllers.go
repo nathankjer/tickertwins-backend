@@ -49,7 +49,7 @@ func GetSimilarTickers(c *gin.Context) {
 		Joins("JOIN tickers ON similar_tickers.related_ticker_id = tickers.id").
 		Where("similar_tickers.ticker_id = ? AND tickers.enabled = ?", ticker.ID, true).
 		Order("similar_tickers.position").
-		Limit(30).
+		Limit(50).
 		Find(&relatedTickers).Error
 	if err != nil {
 		c.AbortWithStatusJSON(500, gin.H{"error": "Error retrieving similar tickers."})
