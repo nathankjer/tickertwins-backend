@@ -1,11 +1,12 @@
 package models
 
 type Ticker struct {
-	ID      uint   `gorm:"primaryKey" json:"-"`
-	Symbol  string `gorm:"column:symbol" json:"symbol"`
-	Name    string `gorm:"column:name" json:"name"`
-	Types   string `gorm:"column:types" json:"type"`
-	Enabled bool   `gorm:"column:enabled" json:"-"`
+	ID          uint   `gorm:"primaryKey" json:"-"`
+	Symbol      string `gorm:"column:symbol" json:"symbol"`
+	Name        string `gorm:"column:name" json:"name"`
+	Description string `gorm:"column:description" json:"description"`
+	Types       string `gorm:"column:types" json:"type"`
+	Enabled     bool   `gorm:"column:enabled" json:"-"`
 }
 
 type SimilarTicker struct {
