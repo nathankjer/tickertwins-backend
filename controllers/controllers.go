@@ -27,7 +27,6 @@ func GetTickers(c *gin.Context) {
 		c.AbortWithStatusJSON(500, gin.H{"error": "Error retrieving tickers."})
 		return
 	}
-	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(200, tickers)
 }
 
@@ -62,7 +61,6 @@ func GetSimilarTickers(c *gin.Context) {
 		Ticker:         ticker,
 		SimilarTickers: relatedTickers,
 	}
-	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(200, response)
 }
 
@@ -86,6 +84,5 @@ func GetRandomTickers(c *gin.Context) {
 		c.AbortWithStatusJSON(500, gin.H{"error": "Error retrieving random tickers."})
 		return
 	}
-	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(200, tickers)
 }

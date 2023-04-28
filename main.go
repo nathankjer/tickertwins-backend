@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/nathankjer/tickertwins-backend/controllers"
@@ -17,6 +18,15 @@ import (
 
 func setupRouter() *gin.Engine {
 	router := gin.Default()
+
+	// Configure CORS middleware
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true
+	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
+	config.AllowHeaders = []string{"Origin", "Content-Type", "Accept", "Authorization"}
+
+	router.Use(cors.New(config))
+
 	router.GET("/tickers", controllers.GetTickers)
 	router.GET("/tickers/random", controllers.GetRandomTickers)
 	router.GET("/tickers/:symbol/similar", controllers.GetSimilarTickers)
